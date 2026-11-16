@@ -1,0 +1,16 @@
+diff --git a/Assets/Scripts/IdeaManager.cs b/Assets/Scripts/IdeaManager.cs
+--- a/Assets/Scripts/IdeaManager.cs
++++ b/Assets/Scripts/IdeaManager.cs
+@@ -24,3 +24,5 @@
+    [SerializeField] private StylusHandler _stylusHandler;
++
++   [SerializeField] private SketchWebsiteBridge websiteBridge;
+ 
+ 
+@@ -348,3 +350,6 @@
+        if (totalPoints > 0) groupCenter /= totalPoints;
++
++       if (websiteBridge != null)
++           websiteBridge.Capture(netObj.NetworkObjectId, lineScripts);
+ 
+ 

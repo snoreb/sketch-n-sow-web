@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="A shared collection of ideas from your Sketch-n-Sow brainstorming session.">
+  <title>Sketch-n-Sow · Idea garden</title>
+  <link rel="stylesheet" href="/style.css">
+  <link rel="stylesheet" href="/diagnostics.css">
+  <script type="importmap">{"imports":{"three":"/vendor/three.module.js","three/addons/controls/OrbitControls.js":"/vendor/OrbitControls.js"}}</script>
+</head>
+<body>
+  <header><a class="brand" href="/" aria-label="Sketch-n-Sow home"><span class="brand-mark">✳</span> sketch-n-sow<span class="edition">LIVE GARDEN</span></a><span id="connection" class="connection" role="status">Connecting…</span></header>
+  <main>
+    <section class="intro"><div><p class="eyebrow">FROM SHARED SPACE TO SHARED IDEAS</p><h1>Give your ideas<br>room to <em>grow.</em></h1><p class="lede">Every seed package holds a possibility.<br>Explore the sketches from your session, from any screen.</p></div><div class="garden-art" aria-hidden="true"><div class="orbit orbit-one"></div><div class="orbit orbit-two"></div><span class="flower">✳</span><span class="seed seed-one"></span><span class="seed seed-two"></span><span class="art-caption">A LITTLE SPACE FOR BIG THINKING</span></div></section>
+    <section aria-labelledby="collection-title"><div class="collection-bar"><div><p class="eyebrow">YOUR SESSION</p><h2 id="collection-title">The idea garden <span id="count">0</span></h2></div><button id="add-sample" class="primary">＋ Plant a sample idea</button></div><p id="notice" role="status" class="notice"></p><div id="grid" class="grid"></div><div id="empty" class="empty"><span aria-hidden="true">⌁</span><h3>Something good starts with a seed.</h3><p>Save a drawing into a seed package in your headset,<br>or plant a sample idea to explore the garden.</p></div></section>
+    <details class="diagnostics" open>
+      <summary>Headset connection diagnostics</summary>
+      <p id="debug-status" class="debug-status" role="status">Checking the server…</p>
+      <h3>Headset app presence</h3>
+      <p id="presence-summary" role="status">Waiting for heartbeat information…</p>
+      <ul id="presence-devices" class="presence-devices"></ul>
+      <p>The Unity bridge sends a heartbeat every 5 seconds. An app is marked offline after 20 seconds without one. Sleep, loss of Wi-Fi, or closing the app can cause this. Online confirms server reachability, not multiplayer membership or successful sketch uploads.</p>
+      <dl class="debug-counts">
+        <div><dt>Upload attempts</dt><dd id="debug-attempts">—</dd></div>
+        <div><dt>Headset-labelled accepted</dt><dd id="debug-headset">—</dd></div>
+        <div><dt>Samples accepted</dt><dd id="debug-samples">—</dd></div>
+        <div><dt>Failed uploads</dt><dd id="debug-rejected">—</dd></div>
+      </dl>
+      <p>“Server reachable” checks this browser’s connection, not the headset. Sources are labels supplied by the sender; sample ideas do not count as headset uploads.</p>
+      <div class="debug-actions"><button id="debug-test" class="secondary">Test website → server</button><button id="debug-refresh" class="secondary">Refresh diagnostics</button></div>
+      <p id="debug-feedback" role="status"></p>
+      <p><strong>Server Url in Unity:</strong> use the address below that belongs to the same network as your headset. Do not use localhost on the headset.</p>
+      <ul id="debug-addresses"></ul>
+      <p>To check the network separately, open that address followed by <code>/api/health</code> in the headset browser. A successful visit appears in the log. This is only a troubleshooting check; normal use does not need the headset browser.</p>
+      <ul>
+        <li><strong>No new request when spawning a package:</strong> check the bridge reference on the host, Server Url, Unity’s HTTP setting, and the network/firewall. The website cannot see a request that never reaches this server.</li>
+        <li><strong>HTTP 4xx or 5xx:</strong> read the error in the log below. The request reached the server but failed.</li>
+        <li><strong>Accepted with 0 points:</strong> Unity sent a package without drawing geometry.</li>
+        <li><strong>Accepted with points but no visible sketch:</strong> check browser rendering below.</li>
+      </ul>
+      <p id="debug-viewer">Browser rendering: waiting for a sketch.</p>
+      <p id="debug-session"></p>
+      <ol id="debug-entries" aria-label="Recent incoming requests"></ol>
+    </details>
+    <footer><span><span class="tiny-dot"></span> Sketch storage</span><span id="storage-mode">Checking storage mode…</span></footer>
+  </main>
+  <dialog id="inspector" aria-labelledby="idea-title"><div class="dialog-top"><div><p class="eyebrow">A CLOSER LOOK</p><h2 id="idea-title"></h2></div><button id="close" class="icon-button" aria-label="Close 3D viewer">✕</button></div><div id="viewport" tabindex="0" aria-label="Interactive 3D sketch. Drag to orbit, right-drag to pan, scroll to zoom."></div><div class="viewer-bottom"><p>Drag to orbit · Right-drag to pan · Scroll to zoom<br><span>Touch: one finger to orbit · two fingers to pan & zoom</span></p><button id="reset" class="secondary">Reset view</button></div><p id="idea-details" class="idea-details"></p></dialog>
+  <script src="/diagnostics.js" defer></script>
+  <script type="module" src="/app.js"></script>
+</body>
+</html>

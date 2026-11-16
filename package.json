@@ -1,0 +1,14 @@
+{
+  "name": "sketch-n-sow-live",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "start": "node server.mjs",
+    "start:cloud": "node --env-file=.env server.mjs --cloud",
+    "save:live": "node --env-file=.env database/save-live.mjs",
+    "test": "node --test"
+  },
+  "dependencies": { "three": "0.170.0" },
+  "engines": { "node": ">=20" }
+}
